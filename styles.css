@@ -1,0 +1,181 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #000;
+    color: #00FF00;
+    font-family: 'Courier New', Courier, monospace;
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+}
+
+.console {
+    width: 80%;
+    height: 80%;
+    overflow-y: auto;
+    border: 2px solid #00FF00;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #000;
+    box-shadow: 0 0 10px #00FF00;
+    animation: flicker 1.5s infinite alternate, backgroundAnimation 10s linear infinite;
+    display: none;
+    color: #00FF00;
+    font-size: 1.2em;
+    position: relative;
+}
+
+.line {
+    white-space: pre-wrap;
+    line-height: 1.5;
+    font-size: 1.2em;
+    position: relative;
+    padding: 5px 0;
+}
+
+.line::before {
+    content: '>';
+    color: #00FF00;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+@keyframes flicker {
+    0%, 100% {
+        opacity: 0.95;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+.input-container {
+    text-align: center;
+    color: #00FF00;
+    font-size: 1.2em;
+}
+
+input[type="text"] {
+    padding: 10px;
+    margin-top: 10px;
+    border: 2px solid #00FF00;
+    background-color: #000;
+    color: #00FF00;
+    width: 80%;
+    font-family: 'Courier New', Courier, monospace;
+    border-radius: 5px;
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #00FF00;
+    color: black;
+    border: none;
+    cursor: pointer;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #00cc00;
+}
+
+@keyframes blink {
+    0% { border-right: 2px solid #00FF00; }
+    100% { border-right: 2px solid transparent; }
+}
+
+.console::after {
+    content: '|';
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    color: #00FF00;
+    animation: blink 1s step-start infinite;
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 50%);
+    animation: backgroundAnimation 10s linear infinite;
+    z-index: -1;
+}
+
+@keyframes backgroundAnimation {
+    0% { background-color: rgba(0, 0, 0, 0.9); }
+    50% { background-color: rgba(0, 0, 0, 0.7); }
+    100% { background-color: rgba(0, 0, 0, 0.9); }
+}
+
+@media (max-width: 768px) {
+    .console {
+        width: 90%;
+        height: 70%;
+        font-size: 1em;
+    }
+
+    .input-container {
+        font-size: 1em;
+    }
+
+    input[type="text"], button {
+        width: 90%;
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 480px) {
+    .console {
+        width: 95%;
+        height: 60%;
+    }
+
+    .input-container {
+        font-size: 0.9em;
+    }
+
+    input[type="text"], button {
+        width: 95%;
+        font-size: 0.9em;
+    }
+}
+
+/* .loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #00FF00;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5em;
+    z-index: 20;
+} */
